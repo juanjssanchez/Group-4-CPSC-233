@@ -2,4 +2,4 @@
 
 Project Ideas
 
-2D fighting game
+
