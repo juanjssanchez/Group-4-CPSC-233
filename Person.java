@@ -12,13 +12,31 @@ public class Person {
 	private Location location;
 
 
+	//getter methods//
 	public attackType getMove(){
 		return ;
 	}
 
+	public int getHealth(){
+		return health;	
+	}
+
+	public Location getLocation(){
+		return location
+	}
+
+
+	//setter methods
+	
+
+
+	//other methods
 	public int decreaseHealth(){
-		
-		return 
+		return health;
+	}
+
+	public int increaseHealth(){
+		return health;
 	}
 
 	public boolean aliveOrDead(){
