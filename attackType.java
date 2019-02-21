@@ -5,7 +5,7 @@ public enum attackType{
 	kick(7);
 
 
-	private int damage;
+	private final int damage;
 
 
 	attackType(int damageAmount){
