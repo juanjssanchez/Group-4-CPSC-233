@@ -49,7 +49,7 @@ class TextApp {
             if (input.equals("1")) {
                 break;
             } else {
-                System.out.println("0Invalid command");
+                System.out.println("Invalid command");
             }
         }
 
@@ -125,7 +125,7 @@ class TextApp {
                 break;
             }
 
-            //this happens if you kill the monster
+            //this happens if you kill the monster (still needs the capturing mechanic instead of the potion dropping)
             System.out.println("------------------------------------------");
             System.out.println(" # " + enemy + " was defeated! # ");
             System.out.println(" # You have " + health + " HP left. # ");
