@@ -1,7 +1,5 @@
 public class Player extends Person{
-    private int health;
     private ArrayLlist<Collecible> items;
-    private Location location;
  
     int potion = 30;
     int maxPlayerDamage = 30;
@@ -12,9 +10,6 @@ public class Player extends Person{
         return;
     }
 
-    public int getHealth(){
-        return health;
-    }
     public void usePotion(){
         health += potion;
     }
