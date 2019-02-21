@@ -5,15 +5,11 @@ public enum attackType{
 	kick(7);
 
 
-	private final int damage;
+	private int damage;
 
-
-	attackType(int damageAmount){
-	damage = damageAmount;
-	}
-	
-	public int getDamage(){
-		return damage;
-	}
+    private attackType randomAttack(){
+    int pick = new Random().nextInt(attackType.values().length);
+    return attackType.values()[pick];
+    }
 
 }
