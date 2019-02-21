@@ -14,7 +14,7 @@ public class Person {
 
 	//getter methods//
 	public attackType getMove(){
-		return ;
+		return attackType.punch;
 	}
 
 	public int getHealth(){
