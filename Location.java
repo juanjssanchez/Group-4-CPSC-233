@@ -12,7 +12,7 @@ class Location {
     }
 
     public getY(){
-        reutrn ycoord;
+        return ycoord;
     }
 }
 
