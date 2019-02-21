@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 /* *** Extremely rough draft of how the text based game might work ***
-     -this is just a starting point to work from
+     -this is just a starting point/example to work from
      -still need to incorporate the other classes to work with this */
 
 
