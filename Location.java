@@ -7,11 +7,11 @@ class Location {
     private int xcoord;
     private int ycoord;
 
-    public getX(){
+    public int getX(){
         return xcoord;
     }
 
-    public getY(){
+    public int getY(){
         return ycoord;
     }
 }
