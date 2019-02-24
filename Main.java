@@ -1,13 +1,20 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.Arrays;
 
 
 /* *** Extremely rough draft of how the text based game might work ***
      -this is just a starting point to work from
-     -still need to incorporate the other classes to work with this */
+     -still need to incorporate the other classes to work with this 
+     UPDATE: ive added a single screen where you can move around using WASD and then pressing ENTER everytime,
+             -the player is represented by an X
+             -the monster is represented by an M
+             -when you get close to the monster, the combat stage will appear
+     
+*/
 
 
-class TextApp {
+public class Main extends Map{
     public static void main(String[] args){
 
         /*    The maps could look something like this i guess ??
@@ -41,6 +48,7 @@ class TextApp {
         int healthPotionDropChance = 50; //percentage
 
         boolean running = true;
+        boolean walking = true;
 
         System.out.println("__          __  _ \n" +
                 "\\ \\        / / | |\n" +
@@ -48,6 +56,21 @@ class TextApp {
                 "  \\ \\/  \\/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ \n" +
                 "   \\  /\\  /  __/ | (_| (_) | | | | | |  __/\n" +
                 "    \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___|");
+
+
+        //two dimensional array(map)
+        char[][] arr = {
+                {'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
+                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
+                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'M', ' ', ' ', ' ', ' ', ' ', 'H'},
+                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
+                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
+                {'H', ' ', ' ', ' ', ' ', ' ', ' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
+                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
+                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
+                {'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
+        };
+
 
         //starting the game
         while(true) {
@@ -63,14 +86,70 @@ class TextApp {
         //Main game begins
         GAME:
         while(running) {
-            System.out.println("------------------------------------------");
+            System.out.println("------------------------------------------\n");
+
+            //movement around screen
+            while(walking){
+                //updates screen
+                for (int i = 0; i < arr.length; i++) {
+                    for (int j = 0; (arr[i] != null && j < arr[i].length); j++)
+                        System.out.print(arr[i][j] + " ");
+                    System.out.println();
+                }
+
+                //moves using WASD and ENTER
+                String input = in.nextLine();
+                moveloop:
+                for (int i = 0; i < 9; i++)
+                    for (int j = 0; j < 16; j++)
+                        if (arr[i][j] == 'X') {
+                            if (input.equals("w")) {
+                                if (arr[i - 1][j] == ' ') {
+                                    arr[i][j] = ' ';
+                                    arr[i - 1][j] = 'X';
+                                    break;
+                                }
+                            }
+                            else if (input.equals("a")) {
+                                if (arr[i][j - 1] == ' ') {
+                                    arr[i][j] = ' ';
+                                    arr[i][j - 1] = 'X';
+                                    break;
+                                }
+                            }
+                            else if (input.equals("d")) {
+                                if (arr[i][j + 1] == ' ') {
+                                    arr[i][j] = ' ';
+                                    arr[i][j + 1] = 'X';
+                                    break;
+                                }
+                            }
+                            else if (input.equals("s")) {
+                                if (arr[i + 1][j] == ' ') {
+                                    arr[i][j] = ' ';
+                                    arr[i + 1][j] = 'X';
+                                    System.out.println('w');
+                                    break moveloop;
+                                }
+                            }
+                        }
+                //enemy nearby
+                for (int i = 0; i < 9; i++)
+                    for (int j = 0; j < 16; j++)
+                        if (arr[i][j] == 'X'){
+                            if (arr[i+1][j] == 'M' || arr[i-1][j] == 'M' || arr[i][j+1] == 'M' || arr[i][j-1] == 'M'){
+                                walking = false;
+                            }
+                        }
+            }
+            walking = true;
 
             //spawns enemy in room
             int enemyHealth = rand.nextInt(maxEnemyHealth);
             String enemy = enemies[rand.nextInt(enemies.length)];
-            System.out.println("\t# OH NO, a " + enemy + " is in the room!!! #\n");
+            System.out.println("\n\t# OH NO, there's a " + enemy + "!! #\n");
 
-            // while alive, choose what to do
+            // while enemy alive, choose what to do
             while(enemyHealth > 0){
                 System.out.println("\tYour HP: " + health);
                 System.out.println("\t" + enemy + "'s HP: " + enemyHealth);
@@ -132,7 +211,7 @@ class TextApp {
                 break;
             }
 
-            //this happens if you kill the monster
+            //this happens when you kill the monster
             System.out.println("------------------------------------------");
             System.out.println(" # " + enemy + " was defeated! # ");
             System.out.println(" # You have " + health + " HP left. # ");
@@ -140,13 +219,19 @@ class TextApp {
                 numHealthPotions++;
                 System.out.println(" # The " + enemy + " dropped a health potion! # ");
                 System.out.println(" You now have " + numHealthPotions + " health potion(s). # ");
-
             }
+             
+            //updates map to get rid of Monster
+            for (int i = 0; i < 9; i++)
+                for (int j = 0; j < 16; j++)
+                    if (arr[i][j] == 'M') {
+                        arr[i][j] = ' ';
+                    }
 
             //choose to continue or nah
             System.out.println("------------------------------------------");
             System.out.println("What would you like to do now?");
-            System.out.println("1. Continue without fighting");
+            System.out.println("1. Continue");
             System.out.println("2. exit dungeon");
 
             String input = in.nextLine();
@@ -168,9 +253,7 @@ class TextApp {
                 break;
             }
         }
-
         System.out.println("THANKS FOR PLAYING");
-
     }
 
 }
