@@ -31,15 +31,20 @@ public class Person {
 
 
 	//other methods
-	public int decreaseHealth(){
-		return health;
+	public void decreaseHealth(int damageAmount){
+		health -= damageAmount;
 	}
 
-	public int increaseHealth(){
-		return health;
+	public void increaseHealth(int healAmount){
+		health += healAmount;
 	}
 
-	public boolean aliveOrDead(){
-		return false;
+	public boolean alive(){
+		if (health > 0){
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
