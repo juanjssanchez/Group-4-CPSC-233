@@ -5,27 +5,23 @@ import java.util.Arrays;
 
 /* *** Extremely rough draft of how the text based game might work ***
      -this is just a starting point to work from
-     -still need to incorporate the other classes to work with this 
-     UPDATE: ive added a single screen where you can move around using WASD and then pressing ENTER everytime,
-             -the player is represented by an X
-             -the monster is represented by an M
-             -when you get close to the monster, the combat stage will appear
-     
-*/
+     -still need to incorporate the other classes to work with this */
 
 
-public class Main extends Map{ ///idk if this should be a subclass
+public class Main extends Map{
     public static void main(String[] args){
 
         Scanner in = new Scanner(System.in);
         Random rand = new Random();
 
-        //Enemy stats, ***this should be in an enemy or person class****
+        //Enemy stats
         String[] enemies = {"Monster", "Scary Monster"};
         int maxEnemyHealth = 75;
         int enemyAttackDamage = 25;
 
-        //Player stats ***playerclass**
+        int numCaptives = 0;
+
+        //Player stats
         int health = 100;
         int attackDamage = 50;
         int numHealthPotions = 3;
@@ -43,15 +39,15 @@ public class Main extends Map{ ///idk if this should be a subclass
                 "    \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___|");
 
 
-        //two dimensional array(map) *** map class ***
+        //two dimensional array(map)
         char[][] arr = {
                 {'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
                 {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
-                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'M', ' ', ' ', ' ', ' ', ' ', 'H'},
+                {'H', ' ', 'M', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
                 {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
+                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'M', ' ', ' ', 'H'},
                 {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
                 {'H', ' ', ' ', ' ', ' ', ' ', ' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
-                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
                 {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
                 {'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
         };
@@ -74,6 +70,7 @@ public class Main extends Map{ ///idk if this should be a subclass
             System.out.println("------------------------------------------\n");
 
             //movement around screen
+
             while(walking){
                 //updates screen
                 for (int i = 0; i < arr.length; i++) {
@@ -81,6 +78,7 @@ public class Main extends Map{ ///idk if this should be a subclass
                         System.out.print(arr[i][j] + " ");
                     System.out.println();
                 }
+                System.out.println("Number of captives: " + numCaptives);
 
                 //moves using WASD and ENTER
                 String input = in.nextLine();
@@ -129,7 +127,7 @@ public class Main extends Map{ ///idk if this should be a subclass
             }
             walking = true;
 
-            //creates random enemy stats
+            //randomizes enemy stats
             int enemyHealth = rand.nextInt(maxEnemyHealth);
             String enemy = enemies[rand.nextInt(enemies.length)];
             System.out.println("\n\t# OH NO, there's a " + enemy + "!! #\n");
@@ -198,19 +196,23 @@ public class Main extends Map{ ///idk if this should be a subclass
 
             //this happens when you kill the monster
             System.out.println("------------------------------------------");
-            System.out.println(" # " + enemy + " was defeated! # ");
+            System.out.println(" # " + enemy + " has been captured # ");
             System.out.println(" # You have " + health + " HP left. # ");
             if(rand.nextInt(100) < healthPotionDropChance){
                 numHealthPotions++;
                 System.out.println(" # The " + enemy + " dropped a health potion! # ");
                 System.out.println(" You now have " + numHealthPotions + " health potion(s). # ");
             }
-             
+            //adds to amount of captives
+            numCaptives++;
+
             //updates map to get rid of Monster
             for (int i = 0; i < 9; i++)
                 for (int j = 0; j < 16; j++)
                     if (arr[i][j] == 'M') {
-                        arr[i][j] = ' ';
+                        if (arr[i+1][j] == 'X' || arr[i-1][j] == 'X' || arr[i][j+1] == 'X' || arr[i][j-1] == 'X') {
+                            arr[i][j] = ' ';
+                        }
                     }
 
             //choose to continue or nah
