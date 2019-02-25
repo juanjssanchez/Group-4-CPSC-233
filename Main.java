@@ -14,7 +14,7 @@ import java.util.Arrays;
 */
 
 
-public class Main extends Map{
+public class Main extends Map{ ///idk if this should be a subclass
     public static void main(String[] args){
 
         Scanner in = new Scanner(System.in);
