@@ -129,7 +129,7 @@ public class Main extends Map{ ///idk if this should be a subclass
             }
             walking = true;
 
-            //spawns enemy in room
+            //creates random enemy stats
             int enemyHealth = rand.nextInt(maxEnemyHealth);
             String enemy = enemies[rand.nextInt(enemies.length)];
             System.out.println("\n\t# OH NO, there's a " + enemy + "!! #\n");
