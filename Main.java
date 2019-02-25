@@ -213,7 +213,7 @@ public class Main extends Map{
             //adds to amount of captives
             numCaptives++;
 
-            //updates map to get rid of Monster
+            //updates map to get rid of recently killer(captured) Monster
             for (int i = 0; i < 9; i++)
                 for (int j = 0; j < 16; j++)
                     if (arr[i][j] == 'M') {
@@ -238,12 +238,12 @@ public class Main extends Map{
 
             //choose to continue playing
             if(input.equals("1")){
-                System.out.println("you continue your adventure");
+                System.out.println("You continue your adventure");
             }
 
             //choose to stop
             else if (input.equals("2")){
-                System.out.println("You exit the dungeon, succesful");
+                System.out.println("You exit the dungeon, successfully");
                 break;
             }
         }
