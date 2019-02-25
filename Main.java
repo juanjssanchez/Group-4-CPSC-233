@@ -17,30 +17,15 @@ import java.util.Arrays;
 public class Main extends Map{
     public static void main(String[] args){
 
-        /*    The maps could look something like this i guess ??
-
-        System.out.println( " _____________________\n" +
-                            "|                     |\n" +
-                            "|   *SCARY MONSTER*   |\n" +
-                            "|        @here        |\n" +
-                            "|                     |\n" +
-                            "|                     |\n" +
-                            "|                     |\n" +
-                            "|         o_o         |\n" +
-                            "|                     |\n" +
-                            "|                     |\n" +
-                            "|_____________________|  " );  */
-
-
         Scanner in = new Scanner(System.in);
         Random rand = new Random();
 
-        //Enemy stats
+        //Enemy stats, ***this should be in an enemy or person class****
         String[] enemies = {"Monster", "Scary Monster"};
         int maxEnemyHealth = 75;
         int enemyAttackDamage = 25;
 
-        //Player stats
+        //Player stats ***playerclass**
         int health = 100;
         int attackDamage = 50;
         int numHealthPotions = 3;
@@ -58,7 +43,7 @@ public class Main extends Map{
                 "    \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___|");
 
 
-        //two dimensional array(map)
+        //two dimensional array(map) *** map class ***
         char[][] arr = {
                 {'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
                 {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
