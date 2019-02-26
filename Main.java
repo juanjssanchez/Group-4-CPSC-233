@@ -6,7 +6,7 @@ import java.util.Arrays;
      Use WASD and press ENTER to move
      Player is represented by X and enemies by M
      Move near enemy to trigger combat stage
-     Theres only one map right now
+     There's only one map at the moment
      */
 
 
