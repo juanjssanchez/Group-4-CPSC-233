@@ -2,15 +2,11 @@ import java.util.Scanner;
 import java.util.Random;
 import java.util.Arrays;
 
-/* *** Extremely rough draft of how the text based game might work ***
-     -this is just a starting point to work from
-     -still need to incorporate the other classes to work with this
-
+/* 
      Use WASD and press ENTER to move
      Player is represented by X and enemies by M
      Move near enemy to trigger combat stage
      Theres only one map right now
-     Note: although the enemies always start in same spot, their stats are randomized
      */
 
 
