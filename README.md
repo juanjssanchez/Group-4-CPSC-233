@@ -2,16 +2,15 @@ import java.util.Scanner;
 import java.util.Random;
 import java.util.Arrays;
 
-
 /* *** Extremely rough draft of how the text based game might work ***
      -this is just a starting point to work from
-     -still need to incorporate the other classes to work with this 
-     
+     -still need to incorporate the other classes to work with this
+
      Use WASD and press ENTER to move
      Player is represented by X and enemies by M
      Move near enemy to trigger combat stage
      Theres only one map right now
-     Note: although the enemies always start in same spot, their stats are randomized 
+     Note: although the enemies always start in same spot, their stats are randomized
      */
 
 
@@ -37,28 +36,14 @@ public class Main extends Map{
 
         boolean running = true;
         boolean walking = true;
-        Capture captureObject = new Capture();      //DELETE//
+        Capture captureObject = new Capture();
+
         System.out.println("__          __  _ \n" +
                 "\\ \\        / / | |\n" +
                 " \\ \\  /\\  / /__| | ___ ___  _ __ ___   ___ \n" +
                 "  \\ \\/  \\/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ \n" +
                 "   \\  /\\  /  __/ | (_| (_) | | | | | |  __/\n" +
                 "    \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___|");
-
-
-        //two dimensional array(map)
-        char[][] arr = {
-                {'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
-                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
-                {'H', ' ', 'M', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
-                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
-                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'M', ' ', ' ', 'H'},
-                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
-                {'H', ' ', ' ', ' ', ' ', ' ', ' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
-                {'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'H'},
-                {'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
-        };
-
 
         //starting the game
         while(true) {
@@ -71,66 +56,33 @@ public class Main extends Map{
             }
         }
 
+        //creates map object
+        Map map1 = new Map();
+
+
+
         //Main game begins
         GAME:
         while(running) {
             System.out.println("------------------------------------------\n");
 
-            //movement around screen
-
+            //movement around map
             while(walking){
                 //updates screen
-                for (int i = 0; i < arr.length; i++) {
-                    for (int j = 0; (arr[i] != null && j < arr[i].length); j++)
-                        System.out.print(arr[i][j] + " ");
+                for (int i = 0; i < map1.getMap().length; i++) {
+                    for (int j = 0; (map1.getMap()[i] != null && j < map1.getMap()[i].length); j++)
+                        System.out.print(map1.getMap()[i][j] + " ");
                     System.out.println();
                 }
-                
                 System.out.println("Number of captives: " + numCaptives);
-                //moves using WASD and ENTER
+
+
                 String input = in.nextLine();
-                moveloop:
-                for (int i = 0; i < 9; i++)
-                    for (int j = 0; j < 16; j++)
-                        if (arr[i][j] == 'X') {
-                            if (input.equals("w")) {
-                                if (arr[i - 1][j] == ' ') {
-                                    arr[i][j] = ' ';
-                                    arr[i - 1][j] = 'X';
-                                    break;
-                                }
-                            }
-                            else if (input.equals("a")) {
-                                if (arr[i][j - 1] == ' ') {
-                                    arr[i][j] = ' ';
-                                    arr[i][j - 1] = 'X';
-                                    break;
-                                }
-                            }
-                            else if (input.equals("d")) {
-                                if (arr[i][j + 1] == ' ') {
-                                    arr[i][j] = ' ';
-                                    arr[i][j + 1] = 'X';
-                                    break;
-                                }
-                            }
-                            else if (input.equals("s")) {
-                                if (arr[i + 1][j] == ' ') {
-                                    arr[i][j] = ' ';
-                                    arr[i + 1][j] = 'X';
-                                    System.out.println('w');
-                                    break moveloop;
-                                }
-                            }
-                        }
-                //enemy nearby
-                for (int i = 0; i < 9; i++)
-                    for (int j = 0; j < 16; j++)
-                        if (arr[i][j] == 'X'){
-                            if (arr[i+1][j] == 'M' || arr[i-1][j] == 'M' || arr[i][j+1] == 'M' || arr[i][j-1] == 'M'){
-                                walking = false;
-                            }
-                        }
+                //move around screen
+                map1.move(input);
+
+                //checks for nearby enemies
+                walking = map1.checkEnemy();
             }
             walking = true;
 
@@ -173,8 +125,8 @@ public class Main extends Map{
                         health += healthPotionHealAmount;
                         numHealthPotions--;
                         System.out.println("\t> You drink a potion, healing for " +healthPotionHealAmount + "."
-                                            + "\n\t> You now have " + health + " HP."
-                                            + "\n\t> You have " + numHealthPotions + " health potions left.\n");
+                                + "\n\t> You now have " + health + " HP."
+                                + "\n\t> You have " + numHealthPotions + " health potions left.\n");
                     }
                     else {
                         System.out.println("\t> You have no health potions left");
@@ -203,10 +155,9 @@ public class Main extends Map{
 
             //this happens when you kill the monster
             System.out.println("------------------------------------------");
-
-            System.out.println(" # You have " + health + " HP left. # ");
             Capture Catch = new Capture();
             Catch.catchMode();
+            System.out.println(" # You have " + health + " HP left. # ");
             if(rand.nextInt(100) < healthPotionDropChance){
                 numHealthPotions++;
                 System.out.println(" # The " + enemy + " dropped a health potion! # ");
@@ -215,14 +166,8 @@ public class Main extends Map{
             //adds to amount of captives
             numCaptives++;
 
-            //updates map to get rid of recently killer(captured) Monster
-            for (int i = 0; i < 9; i++)
-                for (int j = 0; j < 16; j++)
-                    if (arr[i][j] == 'M') {
-                        if (arr[i+1][j] == 'X' || arr[i-1][j] == 'X' || arr[i][j+1] == 'X' || arr[i][j-1] == 'X') {
-                            arr[i][j] = ' ';
-                        }
-                    }
+            //updates map to get rid of Monster
+            map1.deadEnemy();
 
             //choose to continue or nah
             System.out.println("------------------------------------------");
@@ -240,12 +185,12 @@ public class Main extends Map{
 
             //choose to continue playing
             if(input.equals("1")){
-                System.out.println("You continue your adventure");
+                System.out.println("you continue your adventure");
             }
 
             //choose to stop
             else if (input.equals("2")){
-                System.out.println("You exit the dungeon, successfully");
+                System.out.println("You exit the dungeon, succesful");
                 break;
             }
         }
@@ -253,3 +198,5 @@ public class Main extends Map{
     }
 
 }
+
+ 
