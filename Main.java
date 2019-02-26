@@ -14,7 +14,7 @@ import java.util.Arrays;
      */
 
 
-public class MainBackUp extends Map{
+public class Main extends Map{
     public static void main(String[] args){
 
         Scanner in = new Scanner(System.in);
