@@ -23,20 +23,6 @@ public class Map{
     }
 
 
-
-
-
-    //idk about these
-    public char getElement(Location location){
-
-        return '\u0000';
-    }
-
-    public boolean isValidMove(Location currentLocation){
-
-        return true;
-    }
-
     public void deadEnemy(){
         for (int i = 0; i < 9; i++)
             for (int j = 0; j < 16; j++)
