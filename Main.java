@@ -36,6 +36,7 @@ public class MainBackUp extends Map{
 
         boolean running = true;
         boolean walking = true;
+        Capture captureObject = new Capture();
 
         System.out.println("__          __  _ \n" +
                 "\\ \\        / / | |\n" +
@@ -154,7 +155,8 @@ public class MainBackUp extends Map{
 
             //this happens when you kill the monster
             System.out.println("------------------------------------------");
-            System.out.println(" # " + enemy + " has been captured # ");
+            Capture Catch = new Capture();
+            Catch.catchMode();
             System.out.println(" # You have " + health + " HP left. # ");
             if(rand.nextInt(100) < healthPotionDropChance){
                 numHealthPotions++;
@@ -196,5 +198,7 @@ public class MainBackUp extends Map{
     }
 
 }
+
+
 
  
