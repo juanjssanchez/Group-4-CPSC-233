@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.Random;
 import java.util.Arrays;
 
+
 /* *** Extremely rough draft of how the text based game might work ***
      -this is just a starting point to work from
      -still need to incorporate the other classes to work with this
@@ -14,7 +15,7 @@ import java.util.Arrays;
      */
 
 
-public class Main extends Map{
+public class Main{
     public static void main(String[] args){
 
         Scanner in = new Scanner(System.in);
@@ -49,7 +50,6 @@ public class Main extends Map{
 
         //creates map object
         Map map1 = new Map();
-
 
         //Main game begins
         GAME:
