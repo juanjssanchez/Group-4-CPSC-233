@@ -18,12 +18,15 @@ public class BtnTurnHandler implements EventHandler<ActionEvent> {
 
         if (source.getText().contains("Attack")){
             //player.attack();
-            System.out.println("Player attacks " + player.getHealth());  // currently only used for feedback
-            player.decreaseHealth();                                     // player's turn will eventually be implemented
+            player.decreaseHealth();                                        // currently only used for feedback
+            System.out.println("Player attacks " + player.getHealth());     // player's turn will eventually be implemented
+                                                 
         } else if (source.getText().contains("Dodge")){
+            player.decreaseHealth();
             System.out.println("Player dodges " + player.getHealth());
 
         } else if (source.getText().contains("Read")){
+            player.decreaseHealth();
             System.out.println("Player reads opponent's attack " + player.getHealth());
         }
     }
