@@ -21,6 +21,7 @@ public class BattleScene extends BaseScene {
     private int mhealth = 0; //enemy stats will be set by whichever button pressed in FirstScene
     private int mattack = 0;
     private Label playerHealth;
+    private Label enemyHealth;
 
     public BattleScene(Project game, int h, int a) {
         super(game);
@@ -36,40 +37,40 @@ public class BattleScene extends BaseScene {
         root.setPrefRows(2);
 
         //Initialize game
-        Player enemy = new Enemy(mhealth, mattack);
+        Player enemy = new Enemy(getGame(), mhealth, mattack);
 
         Player player = new Human(getGame());
         Game game = new Game(player);
 
+
         //Setting up the first row
-        TilePane firstRow = new TilePane(Orientation.HORIZONTAL);
-        firstRow.setPrefColumns(2);
-        firstRow.setPrefHeight(250);
-        firstRow.setPrefWidth(300);
-        firstRow.setHgap(150);
+        TilePane rowOne = new TilePane(Orientation.HORIZONTAL);
+        rowOne.setPrefColumns(2);
+        rowOne.setPrefHeight(250);
+        rowOne.setPrefWidth(300);
+        rowOne.setHgap(150);
 
-        firstRow.getChildren().add(sceneA(game.getPlayer()));    //Setting up first scene (top left)
-        firstRow.getChildren().add(sceneB(game.getPlayer()));    //Setting up second scene (top right)
+        rowOne.getChildren().add(sceneA(game.getPlayer()));    //Setting up first scene (top left)
+        rowOne.getChildren().add(sceneD()); ////Setting up fourth scene (bottom right)
 
-        //Add first row to root
-        root.getChildren().add(firstRow);
+        rowOne.setAlignment(Pos.CENTER);
 
-        root.setAlignment(Pos.CENTER);
-        firstRow.setAlignment(Pos.CENTER);
+        root.getChildren().add(rowOne);
 
         //Setting up the second row
-        TilePane secondRow = new TilePane(Orientation.HORIZONTAL);
-        secondRow.setPrefColumns(2);
-        secondRow.setPrefHeight(250);
-        secondRow.setPrefWidth(300);
-        secondRow.setHgap(150);
+        TilePane rowTwo = new TilePane(Orientation.HORIZONTAL);
+        rowTwo.setPrefColumns(2);
+        rowTwo.setPrefHeight(250);
+        rowTwo.setPrefWidth(300);
+        rowTwo.setHgap(150);
 
-        secondRow.getChildren().add(sceneC(enemy)); //Setting up third scene (bottom left)
-        secondRow.getChildren().add(sceneD()); ////Setting up fourth scene (bottom right)
+        rowTwo.getChildren().add(sceneC(enemy)); //Setting up third scene (bottom left)
+        rowTwo.getChildren().add(sceneB(game.getPlayer(), enemy));    //Setting up second scene (top right)
 
-        secondRow.setAlignment(Pos.CENTER);
+        root.getChildren().add(rowTwo);
 
-        root.getChildren().add(secondRow);
+        root.setAlignment(Pos.CENTER);
+        rowTwo.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(root, 600, 500);
 
@@ -89,23 +90,23 @@ public class BattleScene extends BaseScene {
         return root;
     }
 
-    public Node sceneB(Player player) { //Combat buttons
+    public Node sceneB(Player player, Player enemy) { //Combat buttons
         //Init buttons
         Button attack = new Button("Attack");
         Button dodge = new Button("Dodge");
-        Button read = new Button("Read");
+        Button magic = new Button("Magic");
         Button back = new Button("Run Away");
 
         attack.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
         dodge.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
-        read.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
+        magic.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
         back.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
 
         //Add event handlers
-        BtnTurnHandler handler = new BtnTurnHandler(player, playerHealth);
+        BtnTurnHandler handler = new BtnTurnHandler(player, enemy, playerHealth, enemyHealth);
         attack.setOnAction(handler);
         dodge.setOnAction(handler);
-        read.setOnAction(handler);
+        magic.setOnAction(handler);
 
         BackBtnHandler bHandler = new BackBtnHandler(getGame());
         back.setOnAction(bHandler);
@@ -114,7 +115,7 @@ public class BattleScene extends BaseScene {
         //Setup vbox
         VBox box = new VBox();
         box.setSpacing(10.0);
-        box.getChildren().addAll(attack, dodge, read, back);
+        box.getChildren().addAll(attack, dodge, magic, back);
         box.setAlignment(Pos.CENTER);
 
         return box;
@@ -123,9 +124,9 @@ public class BattleScene extends BaseScene {
     public Node sceneC(Player enemy) {   // Enemy Stats
         Group root = new Group();
 
-        Label label = new Label("ENEMY:\n\nHealth: " + enemy.getHealth());
+        enemyHealth = new Label("ENEMY:\n\nHealth: " + enemy.getHealth());
 
-        root.getChildren().add(label);
+        root.getChildren().add(enemyHealth);
 
         return root;
     }

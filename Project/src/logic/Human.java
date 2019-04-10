@@ -13,7 +13,7 @@ public class Human extends Player{
     }
 
     public void decreaseHealth(int damage){
-        if (damage >= this.getHealth()){
+        if (damage >= this.getHealth()){        //game over scene if health < 0
             GameOverScene scene = new GameOverScene(project);
             scene.setup();
         } else{
@@ -21,7 +21,7 @@ public class Human extends Player{
         }
     }
 
-    public void takeTurn() {
-        //do something
+    public int takeTurn() {     //does nothing so far
+        return 0;
     }
 }

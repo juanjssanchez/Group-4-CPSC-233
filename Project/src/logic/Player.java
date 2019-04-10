@@ -1,13 +1,13 @@
 package logic;
 
-public abstract class Player {
+public abstract class  Player {
 
     private int health;
     private int attack;
 
     Player() {
         this.health = 100;
-        this.attack = 20;
+        this.attack = 10;
     }
 
     Player(int health, int attack) {
@@ -33,5 +33,5 @@ public abstract class Player {
 
     public abstract void decreaseHealth(int damage);
 
-    public abstract void takeTurn();
+    public abstract int takeTurn();
 }
