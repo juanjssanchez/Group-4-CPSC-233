@@ -20,6 +20,7 @@ public class BattleScene extends BaseScene {
 
     private int mhealth = 0; //enemy stats will be set by whichever button pressed in FirstScene
     private int mattack = 0;
+    private Label playerHealth;
 
     public BattleScene(Project game, int h, int a) {
         super(game);
@@ -37,7 +38,7 @@ public class BattleScene extends BaseScene {
         //Initialize game
         Player enemy = new Enemy(mhealth, mattack);
 
-        Player player = new Human();
+        Player player = new Human(getGame());
         Game game = new Game(player);
 
         //Setting up the first row
@@ -81,9 +82,9 @@ public class BattleScene extends BaseScene {
     public Node sceneA(Player player) { //Player stats
         Group root = new Group();
 
-        Label label = new Label("PLAYER:\n\nHealth: " + player.getHealth());
+        playerHealth = new Label("PLAYER:\n\nHealth: " + player.getHealth());
 
-        root.getChildren().add(label);
+        root.getChildren().add(playerHealth);
 
         return root;
     }
@@ -101,7 +102,7 @@ public class BattleScene extends BaseScene {
         back.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
 
         //Add event handlers
-        BtnTurnHandler handler = new BtnTurnHandler(player);
+        BtnTurnHandler handler = new BtnTurnHandler(player, playerHealth);
         attack.setOnAction(handler);
         dodge.setOnAction(handler);
         read.setOnAction(handler);

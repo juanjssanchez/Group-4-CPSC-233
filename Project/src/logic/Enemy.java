@@ -6,6 +6,14 @@ public class Enemy extends Player{
         super(health, attack);
     }
 
+    public void decreaseHealth(int damage){
+        if (damage >= this.getHealth()){
+            System.out.println("monster dead");
+        } else{
+            this.setHealth(this.getHealth() - damage);
+        }
+    }
+
     public void takeTurn(){
         //do something
     }

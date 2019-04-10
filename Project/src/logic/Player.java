@@ -31,9 +31,7 @@ public abstract class Player {
         this.attack = attack;
     }
 
-    public void decreaseHealth() { //decreases by 1
-        health = health - 10;
-    }
+    public abstract void decreaseHealth(int damage);
 
     public abstract void takeTurn();
 }

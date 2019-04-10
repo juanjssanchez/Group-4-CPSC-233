@@ -2,11 +2,13 @@ package gui;
 
 import drivers.Project;
 import handlers.QuitBtnHandler;
+import handlers.RestartBtnHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class GameOverScene extends BaseScene {
 
@@ -16,10 +18,18 @@ public class GameOverScene extends BaseScene {
 
     @Override
     public void setup() {
+        Label label = new Label("Game Over");
+        label.setScaleX(6.0);
+        label.setScaleY(6.0);
+        label.setLayoutY(10.0);
+
         Button quitbtn = new Button("Quit");
-        HBox box = new HBox();
-        box.getChildren().add(quitbtn);
-        box.setAlignment(Pos.CENTER);        //Move buttons to middle//
+        Button restartbtn = new Button("Play Again");
+
+        VBox box = new VBox();
+        box.getChildren().addAll(label, quitbtn, restartbtn);
+        box.setSpacing(100.0);
+        box.setAlignment(Pos.CENTER);
 
         //Add Hbox to pane//
         StackPane pane = new StackPane();
@@ -29,6 +39,9 @@ public class GameOverScene extends BaseScene {
         //Attach event handlers to buttons//
         QuitBtnHandler qHandler = new QuitBtnHandler();
         quitbtn.setOnAction(qHandler);
+
+        RestartBtnHandler rHandler = new RestartBtnHandler(getGame());
+        restartbtn.setOnAction(rHandler);
 
 
         //Set Scene//
