@@ -12,6 +12,7 @@ public class Project extends Application {
         stage.setScene(scene);
     }
 
+    //Sets javafx window title to "Group 4 Project"
     public void start(Stage stage) {
         this.stage = stage;
         stage.setTitle("Group 4 Project");
