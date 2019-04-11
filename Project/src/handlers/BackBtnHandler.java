@@ -8,15 +8,15 @@ import javafx.event.EventHandler;
 public class BackBtnHandler implements EventHandler<ActionEvent> {
 
     Project project;
+    FirstScene firstScene;
 
-    public BackBtnHandler(Project project){
+    public BackBtnHandler(Project project, FirstScene fs){
         this.project = project;
+        firstScene = fs;
     }
 
     @Override
     public void handle(ActionEvent event) {
-
-        FirstScene scene = new FirstScene(project);
-        scene.setup();
+    	firstScene.show();
     }
 }

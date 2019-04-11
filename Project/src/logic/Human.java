@@ -16,6 +16,8 @@ public class Human extends Player{
         if (damage >= this.getHealth()){        //game over scene if health < 0
             GameOverScene scene = new GameOverScene(project);
             scene.setup();
+            
+            
         } else{
             this.setHealth(this.getHealth() - damage);
         }

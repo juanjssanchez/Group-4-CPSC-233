@@ -5,7 +5,6 @@ import handlers.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -15,28 +14,32 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+import logic.Human;
+import logic.Player;
 
 public class FirstScene extends BaseScene {
-
+	
+	private Button m1btn, m2btn, m3btn, bigbossbtn; 
+	private Player player;
+	
     public FirstScene(Project game) {
         super(game);
+        player = new Human(getGame());
     }
 
     @Override
     public void setup() {
-        
-
         //Create buttons//
-        Button m1btn = new Button("Monster 1(Easy)");        //Monster buttons//
-        Button m2btn = new Button("Monster 2(Normal)");
-        Button m3btn = new Button("Monster 3(Hard");
-        Button bigbossbtn = new Button("Final Boss");
+        m1btn = new Button("Monster 1");        //Monster buttons//
+        m2btn = new Button("Monster 2");
+        m3btn = new Button("Monster 3");
+        bigbossbtn = new Button("Final Boss");
         Button quitbtn = new Button("Quit");
-
+        
         //Images for the buttons//
-        Image quitImg = new Image("file:img/run.gif",50,50,false,false);
+        Image quitImg = new Image("file:img/Run.png");
         quitbtn.setGraphic(new ImageView(quitImg));
+
         Image enem1Img = new Image("file:img/monster1.gif",50,50,false,false);
         m1btn.setGraphic(new ImageView(enem1Img));
         Image enem2Img = new Image("file:img/monster2.gif",50,50,false,false);
@@ -45,7 +48,6 @@ public class FirstScene extends BaseScene {
         m3btn.setGraphic(new ImageView(enem3Img));
         Image enem4Img = new Image("file:img/boss.gif",50,50,false,false);
         bigbossbtn.setGraphic(new ImageView(enem4Img));
-
 
         //Add buttons to HBox//
         VBox box = new VBox();
@@ -63,8 +65,7 @@ public class FirstScene extends BaseScene {
         StackPane pane = new StackPane();
         pane.getChildren().add(box);
         pane.setAlignment(Pos.CENTER);
-        
-        //set background image
+
         BackgroundImage myBI= new BackgroundImage(new Image("file:img/backgroundmain.gif",600,500,false,true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                   BackgroundSize.DEFAULT);
@@ -75,7 +76,7 @@ public class FirstScene extends BaseScene {
         QuitBtnHandler qHandler = new QuitBtnHandler();
         quitbtn.setOnAction(qHandler);
 
-        MonsterBtnHandler oneHandler = new MonsterBtnHandler(getGame());
+        MonsterBtnHandler oneHandler = new MonsterBtnHandler(getGame(), this, player);
         m1btn.setOnAction(oneHandler);
         m2btn.setOnAction(oneHandler);
         m3btn.setOnAction(oneHandler);
@@ -85,6 +86,27 @@ public class FirstScene extends BaseScene {
         //Set Scene//
         setScene(new Scene(pane, 600, 500));
         display();
+    }
+    
+    
+    public void updateScene(String name) {
+    	if(name.equals("Monster 1")) {
+    		m1btn.setDisable(true);
+    	}
+    	if(name.equals("Monster 2")) {
+    		m2btn.setDisable(true);
+    	}
+    	if(name.equals("Monster 3")) {
+    		m3btn.setDisable(true);
+    	}
+    	if(name.equals("Final Boss")) {
+    		bigbossbtn.setDisable(true);
+    	}	
+    	display();
+    }
+    
+    public void show() {
+    	display();
     }
 
 }

@@ -33,6 +33,4 @@ public abstract class BaseScene {
     protected void display() {
         game.setScene(this.scene);
     }
-
-
 }
