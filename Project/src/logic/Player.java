@@ -34,4 +34,6 @@ public abstract class  Player {
     public abstract void decreaseHealth(int damage);
 
     public abstract int takeTurn();
+    
+    
 }
