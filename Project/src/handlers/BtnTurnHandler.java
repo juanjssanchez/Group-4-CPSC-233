@@ -11,13 +11,15 @@ public class BtnTurnHandler implements EventHandler<ActionEvent> {
     Player enemy;
     Label playerHealth;
     Label enemyHealth;
+    Label eventDescription;
 
 
-    public BtnTurnHandler(Player player, Player enemy, Label playerHealth, Label enemyHealth) {
+    public BtnTurnHandler(Player player, Player enemy, Label playerHealth, Label enemyHealth, Label eventDescription) {
         this.player = player;
         this.enemy = enemy;
         this.playerHealth = playerHealth;
         this.enemyHealth = enemyHealth;
+        this.eventDescription = eventDescription;
     }
 
     @Override
@@ -29,15 +31,15 @@ public class BtnTurnHandler implements EventHandler<ActionEvent> {
         if (source.getText().contains("Attack")) {
 
             if (enemyTurn == 0) { // enemy chose attack
-                System.out.println("Both attacked at same time");      //PRINT STATEMENTS SHOULD INSTEAD BE SHOWN IN GUI
+                this.eventDescription.setText("   EVENT DESCRIPTION:\n BOTH ATTACKED AT THE SAME TIME\n(NO DAMAGE TAKEN NOR GIVEN)");
             }
             if (enemyTurn == 1) { // enemy chose dodge
-                System.out.println("Enemy dodged your attack");
+                this.eventDescription.setText("  Event Description:\nEnemy dodged your attack\n(No damage given)");
                 player.decreaseHealth(enemy.getAttack());
                 this.playerHealth.setText("PLAYER:\n\nHealth: " + player.getHealth());
             }
             if (enemyTurn == 2) { // enemy chose "read"
-                System.out.println("You attack enemy");
+                this.eventDescription.setText("  Event Description:\nYou attack enemy" + "You did" + player.getAttack() + "damage");
                 enemy.decreaseHealth(player.getAttack());
                 this.enemyHealth.setText("ENEMY:\n\nHealth: " + enemy.getHealth());
             }
@@ -45,33 +47,33 @@ public class BtnTurnHandler implements EventHandler<ActionEvent> {
         } else if (source.getText().contains("Dodge")) {
 
             if (enemyTurn == 0) {
-                System.out.println("You dodged enemy attack");
+                this.eventDescription.setText("  Event Description:\n\"You dodged enemy attack");
                 enemy.decreaseHealth(player.getAttack());
                 this.enemyHealth.setText("ENEMY:\n\nHealth: " + enemy.getHealth());
             }
             if (enemyTurn == 1) {
-                System.out.println("Both dodged");
+                this.eventDescription.setText("  Event Description:\nBoth dodged");
             }
             if (enemyTurn == 2) {
-                System.out.println("Enemy counters dodge with magic");
+                this.eventDescription.setText("  Event Description:\nEnemy counters dodge with magic");
                 player.decreaseHealth(enemy.getAttack());
                 this.playerHealth.setText("PLAYER:\n\nHealth: " + player.getHealth());
             }
 
         } else if (source.getText().contains("Magic")) {
 
-            if (enemyTurn == 0) {
-                System.out.println("Enemy attacks you");
+            if (enemyTurn == 0) {;
+                this.eventDescription.setText("  Event Description:\nEnemy attacks you");
                 player.decreaseHealth(enemy.getAttack());
                 this.playerHealth.setText("PLAYER:\n\nHealth: " + player.getHealth());
             }
             if (enemyTurn == 1) {
-                System.out.println("You counter dodge with magic");
+                this.eventDescription.setText("  Event Description:\nYou counter dodge with magic");
                 enemy.decreaseHealth(player.getAttack());
                 this.playerHealth.setText("PLAYER:\n\nHealth: " + player.getHealth());
             }
             if (enemyTurn == 2) {
-                System.out.println("Both use magic");
+                this.eventDescription.setText("  Event Description:\nBoth use magic");
             }
         }
     }

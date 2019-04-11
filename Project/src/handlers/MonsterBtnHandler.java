@@ -20,13 +20,13 @@ public class MonsterBtnHandler implements EventHandler<ActionEvent> {
 		int mhealth = 0;
 		int mattack = 0;
 
-		if (source.getText().contains("Monster 1")){
+		if (source.getText().contains("Monster 1(Easy)")){
 			mhealth = 50;
 			mattack = 10;
-		} else if (source.getText().contains("Monster 2")){
+		} else if (source.getText().contains("Monster 2(Normal)")){
 			mhealth = 75;
 			mattack = 15;
-		} else if (source.getText().contains("Monster 3")){
+		} else if (source.getText().contains("Monster 3(Hard)")){
 			mhealth = 100;
 			mattack = 20;
 		} else if (source.getText().contains("Final Boss")){

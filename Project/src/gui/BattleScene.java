@@ -1,6 +1,7 @@
 package gui;
 
 import drivers.Project;
+
 import handlers.BackBtnHandler;
 import handlers.BtnTurnHandler;
 import javafx.geometry.Orientation;
@@ -10,11 +11,15 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import logic.Enemy;
 import logic.Game;
 import logic.Human;
 import logic.Player;
+import javafx.scene.*; 
 
 public class BattleScene extends BaseScene {
 
@@ -22,6 +27,7 @@ public class BattleScene extends BaseScene {
     private int mattack = 0;
     private Label playerHealth;
     private Label enemyHealth;
+    private Label eventDescription;
 
     public BattleScene(Project game, int h, int a) {
         super(game);
@@ -71,6 +77,13 @@ public class BattleScene extends BaseScene {
 
         root.setAlignment(Pos.CENTER);
         rowTwo.setAlignment(Pos.CENTER);
+        
+        //background image
+        BackgroundImage myBI= new BackgroundImage(new Image("file:img/backgroundbattle.gif",600,500,false,true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                  BackgroundSize.DEFAULT);
+        //then you set to your node
+        root.setBackground(new Background(myBI));
 
         Scene scene = new Scene(root, 600, 500);
 
@@ -83,8 +96,9 @@ public class BattleScene extends BaseScene {
     public Node sceneA(Player player) { //Player stats
         Group root = new Group();
 
-        playerHealth = new Label("PLAYER:\n\nHealth: " + player.getHealth());
-
+        playerHealth = new Label("PLAYER:\n\nHEALTH: " + player.getHealth());
+        playerHealth.setTextFill(Color.RED);
+        playerHealth.setStyle("-fx-font: 22 arial;");
         root.getChildren().add(playerHealth);
 
         return root;
@@ -96,6 +110,19 @@ public class BattleScene extends BaseScene {
         Button dodge = new Button("Dodge");
         Button magic = new Button("Magic");
         Button back = new Button("Run Away");
+        
+        //button images 
+        
+        Image attackimg = new Image("file:img/attack.gif",30,30,false,false);
+        attack.setGraphic(new ImageView(attackimg));
+        Image dodgeimg = new Image("file:img/monster1.gif",30,30,false,false);
+        dodge.setGraphic(new ImageView(dodgeimg));
+        Image magicimg = new Image("file:img/monster2.gif",30,30,false,false);
+        magic.setGraphic(new ImageView(magicimg));
+        Image backimg = new Image("file:img/run.gif",30,30,false,false);
+        back.setGraphic(new ImageView(backimg));
+    
+
 
         attack.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
         dodge.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
@@ -103,7 +130,7 @@ public class BattleScene extends BaseScene {
         back.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
 
         //Add event handlers
-        BtnTurnHandler handler = new BtnTurnHandler(player, enemy, playerHealth, enemyHealth);
+        BtnTurnHandler handler = new BtnTurnHandler(player, enemy, playerHealth, enemyHealth, eventDescription);
         attack.setOnAction(handler);
         dodge.setOnAction(handler);
         magic.setOnAction(handler);
@@ -120,12 +147,13 @@ public class BattleScene extends BaseScene {
 
         return box;
     }
-
+    
     public Node sceneC(Player enemy) {   // Enemy Stats
         Group root = new Group();
 
-        enemyHealth = new Label("ENEMY:\n\nHealth: " + enemy.getHealth());
-
+        enemyHealth = new Label("ENEMY:\n\nHEALTH: " + enemy.getHealth());
+        enemyHealth.setTextFill(Color.RED);
+        enemyHealth.setStyle("-fx-font: 22 arial;");
         root.getChildren().add(enemyHealth);
 
         return root;
@@ -133,8 +161,11 @@ public class BattleScene extends BaseScene {
 
     public Node sceneD() {  //event description ("attacked for 10 damage", "enemy blocked the attack")
         HBox box = new HBox();
-        Label label = new Label("  Event\n\nDescription");
-        box.getChildren().add(label);
+        eventDescription = new Label("  EVENT DESCRIPTION:\n");
+        eventDescription.setTextFill(Color.RED);
+        eventDescription.setStyle("-fx-font: 22 Courier;");
+        
+        box.getChildren().add(eventDescription);
         box.setAlignment(Pos.CENTER);
 
 
