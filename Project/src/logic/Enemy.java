@@ -23,7 +23,7 @@ public class Enemy extends Player{
 
     public void decreaseHealth(int damage){
         if (damage >= this.getHealth()){
-            System.out.println("monster dead\nYou won that battle");
+            System.out.println("monster dead\nYou won that battle!");
             firstScene.updateScene(name);
         } else{
             this.setHealth(this.getHealth() - damage);

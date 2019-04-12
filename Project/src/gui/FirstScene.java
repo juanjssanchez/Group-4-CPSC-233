@@ -40,7 +40,7 @@ public class FirstScene extends BaseScene {
         Image quitImg = new Image("file:img/Run.png");
         quitbtn.setGraphic(new ImageView(quitImg));
 
-        Image enem1Img = new Image("file:img/monster1.gif",50,50,false,false);
+        Image enem1Img = new Image("file:img/minion.gif",50,50,false,false);
         m1btn.setGraphic(new ImageView(enem1Img));
         Image enem2Img = new Image("file:img/monster2.gif",50,50,false,false);
         m2btn.setGraphic(new ImageView(enem2Img));
