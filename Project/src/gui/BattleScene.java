@@ -103,7 +103,7 @@ public class BattleScene extends BaseScene {
 
         root.getChildren().add(playerHealth);playerHealth = new Label("PLAYER:\n\nHEALTH: " + player.getHealth());
         playerHealth.setTextFill(Color.INDIGO);
-        playerHealth.setStyle("-fx-font: 15 arial;");
+        playerHealth.setStyle("-fx-font: 22 arial;");
         root.getChildren().add(playerHealth);
 
         return root;
@@ -114,27 +114,32 @@ public class BattleScene extends BaseScene {
         Button attack = new Button("Attack");
         Button dodge = new Button("Dodge");
         Button magic = new Button("Magic");
+        Button potion = new Button("Potion");
         Button back = new Button("Run Away");
 
         //button images
         Image attackimg = new Image("file:img/attack.gif",30,30,false,false);
         attack.setGraphic(new ImageView(attackimg));
-        Image dodgeimg = new Image("file:img/monster1.gif",30,30,false,false);
+        Image dodgeimg = new Image("file:img/dodge.gif",30,30,false,false);
         dodge.setGraphic(new ImageView(dodgeimg));
-        Image magicimg = new Image("file:img/monster2.gif",30,30,false,false);
+        Image magicimg = new Image("file:img/magic.gif",30,30,false,false);
         magic.setGraphic(new ImageView(magicimg));
+        Image potionimg = new Image("file:img/monster2.gif",30,30,false,false);
+        potion.setGraphic(new ImageView(potionimg));
         Image backimg = new Image("file:img/run.gif",30,30,false,false);
         back.setGraphic(new ImageView(backimg));
 
         attack.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
         dodge.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
         magic.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
+        potion.setPrefSize(BtnConfig.btnW,BtnConfig.btnH);
         back.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
 
         //Add event handlers
         BtnTurnHandler handler = new BtnTurnHandler(player, enemy, playerHealth, enemyHealth, eventDescription);
         attack.setOnAction(handler);
         dodge.setOnAction(handler);
+        potion.setOnAction(handler);
         magic.setOnAction(handler);
 
         BackBtnHandler bHandler = new BackBtnHandler(getGame(), firstScene);
@@ -144,7 +149,7 @@ public class BattleScene extends BaseScene {
         //Setup vbox				
         VBox box = new VBox();
         box.setSpacing(10.0);
-        box.getChildren().addAll(attack, dodge, magic, back);
+        box.getChildren().addAll(attack, dodge, magic,potion, back);
         box.setAlignment(Pos.CENTER);
 
         return box;
@@ -155,20 +160,21 @@ public class BattleScene extends BaseScene {
 
         enemyHealth = new Label("ENEMY:\n\nHEALTH: " + enemy.getHealth());
         enemyHealth.setTextFill(Color.RED);
-        enemyHealth.setStyle("-fx-font: 15 arial;");
+        enemyHealth.setStyle("-fx-font: 22 arial;");
         root.getChildren().add(enemyHealth);
+       
 
         return root;
     }
 
     public Node sceneD() {  //event description ("attacked for 10 damage", "enemy blocked the attack")
         HBox box = new HBox();
-        eventDescription = new Label("  EVENT DESCRIPTION:\n");
-        eventDescription.setTextFill(Color.INDIGO);
-        eventDescription.setStyle("-fx-font: 15 Courier;");
+        eventDescription = new Label("     \n\n\nEvent Description:\n");
+        eventDescription.setTextFill(Color.WHITE);
+        eventDescription.setStyle("-fx-font: 18 arial;");
 
         box.getChildren().add(eventDescription);
-        box.setAlignment(Pos.CENTER);
+       
 
         return box;
     }
