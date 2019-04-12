@@ -30,7 +30,7 @@ public abstract class  Player {
         return health;
     }
 
-    public void setHealth(int health) {
+    void setHealth(int health) {
         this.health = health;
     }
 
@@ -38,7 +38,7 @@ public abstract class  Player {
         return attack;
     }
 
-    public void setAttack(int attack) {
+    public void setAttack(int attack){
         this.attack = attack;
     }
 

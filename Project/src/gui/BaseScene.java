@@ -7,30 +7,21 @@ public abstract class BaseScene {
     private Scene scene;
     private Project game;
 
-    public BaseScene(Project game) {
+    BaseScene(Project game) {
         this.game = game;
     }
 
-    public Scene getScene() {
-        return scene;
-    }
-
-    public void setScene(Scene scene) {
+    void setScene(Scene scene) {
         this.scene = scene;
     }
 
-    public Project getGame() {
+    Project getGame() {
         return game;
     }
 
-    public void setGame(Project game) {
-        this.game = game;
-    }
-
-
     public abstract void setup();
 
-    protected void display() {
+    void display() {
         game.setScene(this.scene);
     }
 }

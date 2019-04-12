@@ -1,17 +1,14 @@
 package handlers;
 
-import drivers.Project;
 import gui.FirstScene;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class BackBtnHandler implements EventHandler<ActionEvent> {
 
-    Project project;
-    FirstScene firstScene;
+    private FirstScene firstScene;
 
-    public BackBtnHandler(Project project, FirstScene fs){
-        this.project = project;
+    public BackBtnHandler(FirstScene fs){
         firstScene = fs;
     }
 

@@ -14,9 +14,9 @@ import logic.Player;
 
 public class MonsterBtnHandler implements EventHandler<ActionEvent> {
 
-	Project project;
-	FirstScene firstScene;
-	Player player;
+	private Project project;
+	private FirstScene firstScene;
+	private Player player;
 
 	public MonsterBtnHandler(Project project, FirstScene fs, Player player){
 		this.project = project;
@@ -27,7 +27,7 @@ public class MonsterBtnHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		Button source = (Button) event.getSource();
-		String MonsterName = new String();
+		String MonsterName = "";
 		int mhealth = 0;
 		int mattack = 0;
 		if (source.getText().contains("Monster 1")){

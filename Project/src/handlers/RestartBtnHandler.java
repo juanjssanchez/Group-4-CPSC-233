@@ -7,7 +7,7 @@ import javafx.event.EventHandler;
 
 public class RestartBtnHandler implements EventHandler<ActionEvent> {
 
-    Project project;
+    private Project project;
 
     public RestartBtnHandler(Project project){
         this.project = project;

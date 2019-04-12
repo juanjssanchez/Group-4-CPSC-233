@@ -1,7 +1,7 @@
 package logic;
 
 public class Game {
-    Player player;
+    private Player player;
 
     public Game(Player player){
         this.player = player;

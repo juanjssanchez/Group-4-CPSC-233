@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 public class Project extends Application {
-    Stage stage;
+    private Stage stage;
 
     public void setScene(Scene scene) {
         stage.setScene(scene);

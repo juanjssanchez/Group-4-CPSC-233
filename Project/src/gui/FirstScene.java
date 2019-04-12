@@ -18,10 +18,10 @@ import logic.Human;
 import logic.Player;
 
 public class FirstScene extends BaseScene {
-	
-	private Button m1btn, m2btn, m3btn, bigbossbtn; 
-	private Player player;
-	
+
+    private Button m1btn, m2btn, m3btn, bigbossbtn;
+    private Player player;
+
     public FirstScene(Project game) {
         super(game);
         player = new Human(getGame());
@@ -35,18 +35,18 @@ public class FirstScene extends BaseScene {
         m3btn = new Button("Monster 3");
         bigbossbtn = new Button("Final Boss");
         Button quitbtn = new Button("Quit");
-        
+
         //Images for the buttons//
         Image quitImg = new Image("file:img/Run.png");
         quitbtn.setGraphic(new ImageView(quitImg));
 
-        Image enem1Img = new Image("file:img/monster1.gif",50,50,false,false);
+        Image enem1Img = new Image("file:img/monster1.gif", 50, 50, false, false);
         m1btn.setGraphic(new ImageView(enem1Img));
-        Image enem2Img = new Image("file:img/monster2.gif",50,50,false,false);
+        Image enem2Img = new Image("file:img/monster2.gif", 50, 50, false, false);
         m2btn.setGraphic(new ImageView(enem2Img));
-        Image enem3Img = new Image("file:img/monster3.gif",50,50,false,false);
+        Image enem3Img = new Image("file:img/monster3.gif", 50, 50, false, false);
         m3btn.setGraphic(new ImageView(enem3Img));
-        Image enem4Img = new Image("file:img/boss.gif",50,50,false,false);
+        Image enem4Img = new Image("file:img/boss.gif", 50, 50, false, false);
         bigbossbtn.setGraphic(new ImageView(enem4Img));
 
         //Add buttons to HBox//
@@ -66,12 +66,12 @@ public class FirstScene extends BaseScene {
         pane.getChildren().add(box);
         pane.setAlignment(Pos.CENTER);
 
-        BackgroundImage myBI= new BackgroundImage(new Image("file:img/backgroundmain.gif",600,500,false,true),
+        BackgroundImage myBI = new BackgroundImage(new Image("file:img/backgroundmain.gif", 600, 500, false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                  BackgroundSize.DEFAULT);
+                BackgroundSize.DEFAULT);
         //then you set to your node
         pane.setBackground(new Background(myBI));
-        
+
         //Attach event handlers to buttons//
         QuitBtnHandler qHandler = new QuitBtnHandler();
         quitbtn.setOnAction(qHandler);
@@ -82,31 +82,33 @@ public class FirstScene extends BaseScene {
         m3btn.setOnAction(oneHandler);
         bigbossbtn.setOnAction(oneHandler);
 
-
         //Set Scene//
         setScene(new Scene(pane, 600, 500));
         display();
     }
-    
-    
+
+
     public void updateScene(String name) {
-    	if(name.equals("Monster 1")) {
-    		m1btn.setDisable(true);
-    	}
-    	if(name.equals("Monster 2")) {
-    		m2btn.setDisable(true);
-    	}
-    	if(name.equals("Monster 3")) {
-    		m3btn.setDisable(true);
-    	}
-    	if(name.equals("Final Boss")) {
-    		bigbossbtn.setDisable(true);
-    	}	
-    	display();
+        if (name.equals("Monster 1")) {
+            m1btn.setDisable(true);
+            player.setAttack(15);
+        }
+        if (name.equals("Monster 2")) {
+            m2btn.setDisable(true);
+            player.setAttack(25);
+        }
+        if (name.equals("Monster 3")) {
+            m3btn.setDisable(true);
+            player.setAttack(35);
+        }
+        if (name.equals("Final Boss")) {
+            bigbossbtn.setDisable(true);
+        }
+        display();
     }
-    
+
     public void show() {
-    	display();
+        display();
     }
 
 }

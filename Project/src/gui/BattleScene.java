@@ -20,8 +20,8 @@ import logic.Player;
 
 public class BattleScene extends BaseScene {
 
-    private int mhealth = 0; //enemy stats will be set by whichever button pressed in FirstScene
-    private int mattack = 0;
+    private int mhealth; //enemy stats will be set by whichever button pressed in FirstScene
+    private int mattack;
     private Label eventDescription;
     private Label playerHealth;
     private Label enemyHealth;
@@ -46,7 +46,7 @@ public class BattleScene extends BaseScene {
         root.setPrefRows(2);
 
         //Initialize game
-        Enemy enemy = new Enemy(getGame(), mhealth, mattack, firstScene, monsterName);
+        Enemy enemy = new Enemy(mhealth, mattack, firstScene, monsterName);
 
         Game game = new Game(player);
 
@@ -61,7 +61,7 @@ public class BattleScene extends BaseScene {
         rowOne.getChildren().add(sceneA(game.getPlayer()));    //Setting up first scene (top left)
         rowOne.getChildren().add(sceneD()); ////Setting up fourth scene (bottom right)
 
-        rowOne.setAlignment(Pos.CENTER);
+        rowOne.setAlignment(Pos.TOP_RIGHT);
 
         root.getChildren().add(rowOne);
 
@@ -78,10 +78,10 @@ public class BattleScene extends BaseScene {
         root.getChildren().add(rowTwo);
 
         root.setAlignment(Pos.CENTER);
-        rowTwo.setAlignment(Pos.CENTER);
+        rowTwo.setAlignment(Pos.CENTER_LEFT);
 
         //background image
-        BackgroundImage myBI= new BackgroundImage(new Image("file:img/backgroundbattle.gif",600,500,false,true),
+        BackgroundImage myBI = new BackgroundImage(new Image("file:img/backgroundbattle.gif", 600, 500, false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         //then you set to your node
@@ -96,12 +96,13 @@ public class BattleScene extends BaseScene {
 
     }
 
-    public Node sceneA(Player player) { //Player stats
+    private Node sceneA(Player player) { //Player stats
         Group root = new Group();
 
         playerHealth = new Label();
 
-        root.getChildren().add(playerHealth);playerHealth = new Label("PLAYER:\n\nHEALTH: " + player.getHealth());
+        root.getChildren().add(playerHealth);
+        playerHealth = new Label("PLAYER:\nHealth: " + player.getHealth()+"\nAttack "+player.getAttack());
         playerHealth.setTextFill(Color.INDIGO);
         playerHealth.setStyle("-fx-font: 15 arial;");
         root.getChildren().add(playerHealth);
@@ -109,7 +110,7 @@ public class BattleScene extends BaseScene {
         return root;
     }
 
-    public Node sceneB(Player player, Player enemy) { //Combat buttons
+    private Node sceneB(Player player, Player enemy) { //Combat buttons
         //Init buttons
         Button attack = new Button("Attack");
         Button dodge = new Button("Dodge");
@@ -117,13 +118,13 @@ public class BattleScene extends BaseScene {
         Button back = new Button("Run Away");
 
         //button images
-        Image attackimg = new Image("file:img/attack.gif",30,30,false,false);
+        Image attackimg = new Image("file:img/attack.gif", 30, 30, false, false);
         attack.setGraphic(new ImageView(attackimg));
-        Image dodgeimg = new Image("file:img/monster1.gif",30,30,false,false);
+        Image dodgeimg = new Image("file:img/monster1.gif", 30, 30, false, false);
         dodge.setGraphic(new ImageView(dodgeimg));
-        Image magicimg = new Image("file:img/monster2.gif",30,30,false,false);
+        Image magicimg = new Image("file:img/monster2.gif", 30, 30, false, false);
         magic.setGraphic(new ImageView(magicimg));
-        Image backimg = new Image("file:img/run.gif",30,30,false,false);
+        Image backimg = new Image("file:img/run.gif", 30, 30, false, false);
         back.setGraphic(new ImageView(backimg));
 
         attack.setPrefSize(BtnConfig.btnW, BtnConfig.btnH);
@@ -137,7 +138,7 @@ public class BattleScene extends BaseScene {
         dodge.setOnAction(handler);
         magic.setOnAction(handler);
 
-        BackBtnHandler bHandler = new BackBtnHandler(getGame(), firstScene);
+        BackBtnHandler bHandler = new BackBtnHandler(firstScene);
         back.setOnAction(bHandler);
 
 
@@ -150,18 +151,19 @@ public class BattleScene extends BaseScene {
         return box;
     }
 
-    public Node sceneC(Player enemy) {   // Enemy Stats
+    private Node sceneC(Player enemy) {   // Enemy Stats
         Group root = new Group();
 
-        enemyHealth = new Label("ENEMY:\n\nHEALTH: " + enemy.getHealth());
+        enemyHealth = new Label("ENEMY:\nHealth: " + enemy.getHealth()+"\nAttack "+enemy.getAttack());
         enemyHealth.setTextFill(Color.RED);
         enemyHealth.setStyle("-fx-font: 15 arial;");
         root.getChildren().add(enemyHealth);
 
+
         return root;
     }
 
-    public Node sceneD() {  //event description ("attacked for 10 damage", "enemy blocked the attack")
+    private Node sceneD() {  //event description ("attacked for 10 damage", "enemy blocked the attack")
         HBox box = new HBox();
         eventDescription = new Label("  EVENT DESCRIPTION:\n");
         eventDescription.setTextFill(Color.INDIGO);
