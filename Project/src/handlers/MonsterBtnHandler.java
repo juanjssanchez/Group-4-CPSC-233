@@ -1,5 +1,9 @@
 package handlers;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import drivers.Project;
 import gui.BattleScene;
 import gui.FirstScene;
@@ -26,22 +30,49 @@ public class MonsterBtnHandler implements EventHandler<ActionEvent> {
 		String MonsterName = new String();
 		int mhealth = 0;
 		int mattack = 0;
-
 		if (source.getText().contains("Monster 1")){
-			mhealth = 50;
-			mattack = 10;
+			BufferedReader reader;
+			try {
+				reader = new BufferedReader(new FileReader("cd ../../stats/monster1stats.txt"));
+				mhealth = Integer.parseInt(reader.readLine());
+				mattack = Integer.parseInt(reader.readLine());
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
 			MonsterName = "Monster 1";
 		} else if (source.getText().contains("Monster 2")){
-			mhealth = 75;
-			mattack = 15;
+			BufferedReader reader;
+			try {
+				reader = new BufferedReader(new FileReader("cd ../../stats/monster2stats.txt"));
+				mhealth = Integer.parseInt(reader.readLine());
+				mattack = Integer.parseInt(reader.readLine());
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
 			MonsterName = "Monster 2";
 		} else if (source.getText().contains("Monster 3")){
-			mhealth = 100;
-			mattack = 20;
+			BufferedReader reader;
+			try {
+				reader = new BufferedReader(new FileReader("cd ../../stats/monster3stats.txt"));
+				mhealth = Integer.parseInt(reader.readLine());
+				mattack = Integer.parseInt(reader.readLine());
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
 			MonsterName = "Monster 3";
 		} else if (source.getText().contains("Final Boss")){
-			mhealth = 200;
-			mattack = 50;
+			BufferedReader reader;
+			try {
+				reader = new BufferedReader(new FileReader("cd ../../stats/finalBossStats.txt"));
+				mhealth = Integer.parseInt(reader.readLine());
+				mattack = Integer.parseInt(reader.readLine());
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
 			MonsterName = "Final Boss";
 		}
 
