@@ -103,7 +103,7 @@ public class BattleScene extends BaseScene {
 
         root.getChildren().add(playerHealth);playerHealth = new Label("PLAYER:\n\nHEALTH: " + player.getHealth());
         playerHealth.setTextFill(Color.INDIGO);
-        playerHealth.setStyle("-fx-font: 12 arial;");
+        playerHealth.setStyle("-fx-font: 15 arial;");
         root.getChildren().add(playerHealth);
 
         return root;
@@ -155,7 +155,7 @@ public class BattleScene extends BaseScene {
 
         enemyHealth = new Label("ENEMY:\n\nHEALTH: " + enemy.getHealth());
         enemyHealth.setTextFill(Color.RED);
-        enemyHealth.setStyle("-fx-font: 12 arial;");
+        enemyHealth.setStyle("-fx-font: 15 arial;");
         root.getChildren().add(enemyHealth);
 
         return root;
@@ -165,7 +165,7 @@ public class BattleScene extends BaseScene {
         HBox box = new HBox();
         eventDescription = new Label("  EVENT DESCRIPTION:\n");
         eventDescription.setTextFill(Color.INDIGO);
-        eventDescription.setStyle("-fx-font: 12 Courier;");
+        eventDescription.setStyle("-fx-font: 15 Courier;");
 
         box.getChildren().add(eventDescription);
         box.setAlignment(Pos.CENTER);
