@@ -1,13 +1,24 @@
 package logic;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public abstract class  Player {
 
     private int health;
     private int attack;
 
     Player() {
-        this.health = 100;
-        this.attack = 10;
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader("cd ../../stats/playerStats.txt"));
+			this.health = Integer.parseInt(reader.readLine());
+			this.attack = Integer.parseInt(reader.readLine());
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     Player(int health, int attack) {
