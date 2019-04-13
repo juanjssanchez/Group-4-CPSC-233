@@ -1,4 +1,4 @@
-Head over to the repository: Group-4-CPSC-233 
+Head over to the repository: Group-4-CPSC-233 \n
 Download the required files from the Project folder in the repository
 If you are using an IDE such as Eclipse, copy every folder/file from Project folder into your own project in Eclipse
 
