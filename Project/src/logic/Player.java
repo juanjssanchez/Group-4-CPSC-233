@@ -30,7 +30,7 @@ public abstract class  Player {
         return health;
     }
 
-    void setHealth(int health) {
+    public void setHealth(int health) {
         this.health = health;
     }
 

@@ -4,8 +4,8 @@ import drivers.Project;
 import javafx.scene.Scene;
 
 public abstract class BaseScene {
-    private Scene scene;
-    private Project game;
+	protected Scene scene;
+    protected Project game;
 
     BaseScene(Project game) {
         this.game = game;

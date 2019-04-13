@@ -16,6 +16,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import logic.Human;
 import logic.Player;
+import gui.WinScene;
+
 
 public class FirstScene extends BaseScene {
 
@@ -87,24 +89,34 @@ public class FirstScene extends BaseScene {
         display();
     }
 
-
     public void updateScene(String name) {
         if (name.equals("Monster 1")) {
             m1btn.setDisable(true);
-            player.setAttack(15);
+            player.setHealth(player.getHealth() + 50); //gain 50 health if you beat monsters
+            player.setAttack(20);   //gain stronger attack
+            display();
+
         }
         if (name.equals("Monster 2")) {
             m2btn.setDisable(true);
+            player.setHealth(player.getHealth() + 50);
             player.setAttack(25);
+            display();
+
         }
         if (name.equals("Monster 3")) {
             m3btn.setDisable(true);
+            player.setHealth(player.getHealth() + 50);
             player.setAttack(35);
+            display();
+
         }
         if (name.equals("Final Boss")) {
             bigbossbtn.setDisable(true);
+            WinScene scene = new WinScene(game);
+            scene.setup();
         }
-        display();
+
     }
 
     public void show() {
