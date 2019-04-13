@@ -5,4 +5,4 @@ Head over to the repository: Group-4-CPSC-233
 - If you are not using Eclipse
 1. You only need the src, stats, and image folders.
 2. Have each folder in the same directory and compile all files in src.
-3. Run Project file from /src/drivers
+3. Run Project.java file from /src/drivers
