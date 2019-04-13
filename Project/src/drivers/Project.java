@@ -5,6 +5,9 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
+//Project started from Session Three as a foundation:
+//https://www.dropbox.com/sh/ladjdt873r09yb3/AABiKWwhQJghfboPZLuAJiVsa?dl=0&preview=SessionThree.zip
+
 public class Project extends Application {
     private Stage stage;
 
